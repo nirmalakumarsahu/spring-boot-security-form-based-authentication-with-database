@@ -1,0 +1,6 @@
+server:
+  port: 9897
+
+spring:
+  application:
+    name: spring-boot-security-using-database-form-based
