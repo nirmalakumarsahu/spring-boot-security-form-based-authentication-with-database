@@ -7,6 +7,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -30,9 +32,36 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-
+       httpSecurity.authorizeHttpRequests( authorize -> authorize
+                       .requestMatchers("/", "/login", "/registration").permitAll()
+                       .anyRequest().authenticated()
+               )
+               .csrf(AbstractHttpConfigurer::disable)
+               .formLogin(form -> form
+                       .loginPage("/login")
+                       .loginProcessingUrl("/login")
+                       .failureUrl("/login?error")
+                       .usernameParameter("username")
+                       .passwordParameter("password")
+                       .defaultSuccessUrl("/dashboard", true)
+       )
+               .logout(logout -> logout
+                       .logoutUrl("/logout")
+                       .invalidateHttpSession(true)
+                       .deleteCookies("JSESSIONID")
+                       .logoutSuccessUrl("/login?logout")
+               )
+               .sessionManagement(session -> session
+                       .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                       .invalidSessionUrl("/login?invalid-session")
+                       .maximumSessions(1)
+                       .maxSessionsPreventsLogin(false)
+                       .expiredUrl("/login?session-expire")
+               )
+               .exceptionHandling(exception -> exception
+                       .authenticationEntryPoint(customAuthenticationEntryPoint)
+               );
         return  httpSecurity.build();
     }
-
 
 }

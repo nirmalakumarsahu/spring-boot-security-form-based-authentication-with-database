@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Sign Up</title>
+
+    <!-- Third party CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+
+    <!-- Third party JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJ+Y6kZZgvdU0q2e5l5hb7ie7GkZ7Px1iC4Ec="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+            crossorigin="anonymous"></script>
+</head>
+<style>
+.registration_bord_div {
+    background-color: #4034340f;
+    border: 1px solid #4034340f;
+    border-radius: 20px;
+}
+</style>
+<body>
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 registration_bord_div p-5">
+
+                <!-- Registration Failed -->
+                <div th:if="${registrationError} != null" class="alert alert-danger alert-dismissible fade show"
+                    role="alert">
+                    <strong th:text="${registrationError}"></strong>
+                    <button type="button" class="close" data-dismiss="alert"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <h4 class="card-title text-center">Register</h4>
+                <form method="POST" class="my-login-validation"  th:action="@{/registration}" th:object="${user}">
+                    <div class="form-group">
+                        <label for="userName">User Name</label> <input id="userName"
+                            type="text" class="form-control" th:name="userName" required autofocus>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label> <input id="email"
+                            type="email" class="form-control" th:name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label> <input id="password"
+                            type="password" class="form-control" th:name="password" required data-eye>
+                    </div>
+
+                    <div class="form-group m-0">
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <label>Already have an account?</label><a th:href="@{/login}">Login</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+</body>
+</html>
