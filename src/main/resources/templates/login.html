@@ -33,7 +33,6 @@
 <section class="vh-100">
     <div class="container py-5 h-100">
         <div class="row d-flex align-items-center justify-content-center h-100">
-
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 login_bord_div p-5">
 
                 <!-- Success messages -->
@@ -44,7 +43,6 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-
 
                 <!-- Authentication failed -->
                 <div th:if="${param.error}"
@@ -66,7 +64,6 @@
                     </button>
                 </div>
 
-
                 <h4 class="card-title text-center">Please Login</h4>
                 <form method="POST" th:action="@{/login}">
 
@@ -82,7 +79,6 @@
                         <input type="password" id="password" class="form-control" name="password" required/>
                     </div>
 
-
                     <!-- Submit button -->
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
 
@@ -94,8 +90,6 @@
                 </form>
 
             </div>
-
-
         </div>
     </div>
 </section>
