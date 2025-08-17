@@ -1,6 +1,8 @@
 package com.sahu.springboot.security.controller;
 
 import com.sahu.springboot.security.dto.UserRequestDTO;
+import com.sahu.springboot.security.service.UserService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +13,10 @@ import java.util.Map;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 public class AuthController {
+
+    private final UserService userService;
 
     @GetMapping("/login")
     public String showLoginPage() {
@@ -24,9 +29,23 @@ public class AuthController {
     }
 
     @PostMapping("/registration")
-    public String registrationProcess(Map<String, Object> map, @ModelAttribute("user") UserRequestDTO userRequestDTO) {
-//        LOGGER.debug("Inside registrationProcess() method");
-//        LOGGER.info("User data - " + user.getEmail());
+    public String registrationProcess(@ModelAttribute("user") UserRequestDTO userRequestDTO, Map<String, Object> map) {
+        log.debug("Registration process started for user: {}", userRequestDTO.userName());
+
+        //Check if the user already exists
+        if(userService.existsByUserName(userRequestDTO.userName())) {
+            map.put("registrationError", "Username already exists. Please choose a different username.");
+            return "registration";
+        }
+
+        if(userService.existsByEmail(userRequestDTO.email())) {
+            map.put("registrationError", "Email already exists. Please choose a different email.");
+            return "registration";
+        }
+
+        use
+
+
 //        if (user.getEmail() != null) {
 //            Optional<User> isExist = userService.findByEmail(user.getEmail());
 //
