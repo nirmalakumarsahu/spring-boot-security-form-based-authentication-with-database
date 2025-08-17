@@ -14,7 +14,7 @@
 	<artifactId>spring-boot-security-using-database-form-based</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-boot-security-using-database-form-based</name>
-	<description>Demo project for Spring Boot</description>
+	<description>spring-boot-security-using-database-form-based</description>
 	<url>http://example.com</url>
 
 	<properties>
