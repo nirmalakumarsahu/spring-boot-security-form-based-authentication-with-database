@@ -24,7 +24,7 @@
 
 <body>
 <div class="container-fluid main_body_div">
-    <div class="mb-3">
+    <div>
         <h1 class="text-center mt-5">Welcome to the Dashboard</h1>
         <p class="text-center">Here you can redirect to the Admin or User Dashboard based on your role.</p>
         <div class="text-center mt-4">
@@ -41,7 +41,7 @@
             </a>
         </div>
     </div>
-    <div>
+    <div class="mt-5 d-flex justify-content-end">
         <a class="btn btn-outline-danger btn-sm rounded-pill d-inline-flex align-items-center px-3 py-2 rounded-pill shadow-sm"
            th:href="@{/logout}">
             <i class="fa fa-sign-out mr-1"></i> Logout
