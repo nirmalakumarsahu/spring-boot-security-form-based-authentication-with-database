@@ -1,5 +1,6 @@
 package com.sahu.springboot.security.controller;
 
+import com.sahu.springboot.security.constant.AuthConstants;
 import com.sahu.springboot.security.dto.UserRequestDTO;
 import com.sahu.springboot.security.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @Controller
@@ -20,49 +22,38 @@ public class AuthController {
 
     @GetMapping("/login")
     public String showLoginPage() {
-        return "login";
+        return AuthConstants.LOGIN_PAGE;
     }
 
     @GetMapping("/registration")
-    public String showRegistrationPage(@ModelAttribute("user") UserRequestDTO userRequestDTO) {
-        return "registration";
+    public String showRegistrationPage() {
+        return AuthConstants.REGISTRATION_PAGE;
     }
 
     @PostMapping("/registration")
     public String registrationProcess(@ModelAttribute("user") UserRequestDTO userRequestDTO, Map<String, Object> map) {
-        log.debug("Registration process started for user: {}", userRequestDTO.userName());
+        log.debug("Registration process started for user: {}", userRequestDTO.username());
 
         //Check if the user already exists
-        if(userService.existsByUserName(userRequestDTO.userName())) {
-            map.put("registrationError", "Username already exists. Please choose a different username.");
-            return "registration";
+        if(userService.existsByUsername(userRequestDTO.username())) {
+            map.put(AuthConstants.REGISTRATION_ERROR, "Username already exists. Please choose a different username.");
+            return AuthConstants.REGISTRATION_PAGE;
         }
 
         if(userService.existsByEmail(userRequestDTO.email())) {
-            map.put("registrationError", "Email already exists. Please choose a different email.");
+            map.put(AuthConstants.REGISTRATION_ERROR, "Email already exists. Please choose a different email.");
             return "registration";
         }
 
-        use
+        //Add the user
+        if(Objects.nonNull(userService.addUser(userRequestDTO))) {
+            map.put(AuthConstants.REGISTRATION_SUCCESS, "Registration successful! You can now log in.");
+            return AuthConstants.LOGIN_PAGE;
 
-
-//        if (user.getEmail() != null) {
-//            Optional<User> isExist = userService.findByEmail(user.getEmail());
-//
-//            if (isExist.isPresent()) {
-//                map.put(LoginConstants.REGISTRATION_ERROR, environment.getProperty("duplicate_user_error_msg"));
-//                return LVNConstants.REGISTRATION_PAGE;
-//            } else {
-//                Long registeredUserId = userService.registerUser(user);
-//                if (registeredUserId != null) {
-//                    map.put(LoginConstants.REGISTRATION_SUCCESS, environment.getProperty("registration_success_msg"));
-//                } else {
-//                    map.put(LoginConstants.REGISTRATION_ERROR, environment.getProperty("registration_failed_msg"));
-//                }
-//            }
-//        }
-
-        return "login";
+        } else {
+            map.put(AuthConstants.REGISTRATION_ERROR, "Registration failed. Please try again.");
+            return AuthConstants.REGISTRATION_PAGE;
+        }
     }
 
 

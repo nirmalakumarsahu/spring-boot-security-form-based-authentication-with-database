@@ -33,5 +33,5 @@ spring:
 # Logging Configuration
 logging:
   level:
-    org.springframework.security: DEBUG
-    com.sahu.sprngboot.security: DEBUG
+    #org.springframework.security: DEBUG
+    com.sahu.springboot.security: DEBUG

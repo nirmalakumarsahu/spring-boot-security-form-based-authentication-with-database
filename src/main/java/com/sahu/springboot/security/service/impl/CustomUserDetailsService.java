@@ -1,5 +1,6 @@
 package com.sahu.springboot.security.service.impl;
 
+import com.sahu.springboot.security.constant.AuthConstants;
 import com.sahu.springboot.security.model.Role;
 import com.sahu.springboot.security.repository.UserRepository;
 import com.sahu.springboot.security.security.dto.CustomUserDetails;
@@ -25,10 +26,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.debug("Loading user by username: {}", username);
-        return userRepository.findByUserName(username).map(user -> {
+        return userRepository.findByUsername(username).map(user -> {
 
             List<String> userRoles = user.getRoles().stream().map(Role::getName).toList();
-            List<GrantedAuthority> authorities = userRoles.stream().map(role -> new SimpleGrantedAuthority("ROLE_"+role))
+            List<GrantedAuthority> authorities = userRoles.stream().map(role -> new SimpleGrantedAuthority(AuthConstants.ROLE_PREFIX + role))
                     .collect(Collectors.toList());
 
             return new CustomUserDetails(user.getUsername(), user.getPassword(), authorities, user.getId(), user.getEmail(), userRoles);

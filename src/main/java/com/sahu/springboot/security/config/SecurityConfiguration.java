@@ -1,5 +1,6 @@
 package com.sahu.springboot.security.config;
 
+import com.sahu.springboot.security.constant.AuthConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,21 +34,21 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
        httpSecurity.authorizeHttpRequests( authorize -> authorize
-                       .requestMatchers("/", "/login", "/registration").permitAll()
-                       .requestMatchers("/dashboard").hasAnyRole("USER", "ADMIN")
+                       .requestMatchers("/", AuthConstants.LOGIN_URL, AuthConstants.REGISTRATION_URL).permitAll()
+                       .requestMatchers(AuthConstants.DASHBOARD_URL).hasAnyRole(AuthConstants.ROLE_ADMIN, AuthConstants.ROLE_USER)
                        .anyRequest().authenticated()
                )
                .csrf(AbstractHttpConfigurer::disable)
                .formLogin(form -> form
-                       .loginPage("/login")
-                       .loginProcessingUrl("/login")
+                       .loginPage(AuthConstants.LOGIN_URL)
+                       .loginProcessingUrl(AuthConstants.LOGIN_URL)
                        .failureUrl("/login?error")
                        .usernameParameter("username")
                        .passwordParameter("password")
-                       .defaultSuccessUrl("/dashboard", true)
+                       .defaultSuccessUrl(AuthConstants.DASHBOARD_URL, true)
        )
                .logout(logout -> logout
-                       .logoutUrl("/logout")
+                       .logoutUrl(AuthConstants.LOGOUT_URL)
                        .invalidateHttpSession(true)
                        .deleteCookies("JSESSIONID")
                        .logoutSuccessUrl("/login?logout")

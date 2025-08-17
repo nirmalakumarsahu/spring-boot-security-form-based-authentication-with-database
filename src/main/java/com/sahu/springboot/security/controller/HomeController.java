@@ -1,5 +1,6 @@
 package com.sahu.springboot.security.controller;
 
+import com.sahu.springboot.security.constant.AuthConstants;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -12,13 +13,13 @@ public class HomeController {
     @GetMapping("/")
     public String home() {
         log.info("Home page accessed");
-        return "login";
+        return AuthConstants.LOGIN_PAGE;
     }
 
     @GetMapping("/dashboard")
     public String showDashboard() {
         log.info("Dashboard page accessed");
-        return "dashboard";
+        return AuthConstants.DASHBOARD_PAGE;
     }
 
 }
