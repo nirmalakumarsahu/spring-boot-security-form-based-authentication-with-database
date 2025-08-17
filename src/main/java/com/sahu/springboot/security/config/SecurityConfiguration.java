@@ -56,7 +56,7 @@ public class SecurityConfiguration {
                         .logoutSuccessUrl("/login?logout")
                 )
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                         .invalidSessionUrl("/login?invalidSession")
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(false)

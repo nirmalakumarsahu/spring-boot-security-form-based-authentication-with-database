@@ -51,10 +51,10 @@ public class AuthController {
             redirectAttributes.addFlashAttribute(AuthConstants.REGISTRATION_SUCCESS, "Registration successful! You can now login.");
             return AuthConstants.REDIRECT_LOGIN_URL;
 
-        } else {
-            redirectAttributes.addFlashAttribute(AuthConstants.REGISTRATION_ERROR, "Registration failed. Please try again.");
-            return AuthConstants.REDIRECT_REGISTRATION_URL;
         }
+
+        redirectAttributes.addFlashAttribute(AuthConstants.REGISTRATION_ERROR, "Registration failed. Please try again.");
+        return AuthConstants.REDIRECT_REGISTRATION_URL;
     }
 
 
