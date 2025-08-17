@@ -25,27 +25,30 @@
 <body>
 <div class="container-fluid main_body_div">
     <div class="mb-3">
-        <h1 class="text-center mt-5">Welcome to the Dashboard</h1>
-        <p class="text-center">Here you can redirect to the Admin or User Dashboard based on your role.</p>
+        <h1 class="text-center mt-5">Welcome to the User Dashboard</h1>
+        <p class="text-center">Here you can manage your profile, view your activities, and access user-specific
+            features.</p>
         <div class="text-center mt-4">
-            <a class="btn btn-primary admin_dashboard_btn"
-               id="adminDashboard"
-               th:href="@{/admin-dashboard}">
-                <i class="fa fa-user user_dashboard_i"></i> Admin Dashboard
-            </a>
-
-            <a class="btn btn-secondary user_dashboard_btn"
-               id="userDashboard"
-               th:href="@{/user-dashboard}">
-                <i class="fa fa-user user_dashboard_i"></i> User Dashboard
-            </a>
+            <a class="btn btn-primary">View Profile</a>
+            <a class="btn btn-secondary">View Activities</a>
+            <a class="btn btn-success">Settings</a>
         </div>
     </div>
 
-    <div>
-        <a th:href="@{/logout}"
-           class="btn btn-outline-danger btn-sm rounded-pill d-inline-flex align-items-center shadow-sm">
-            <i class="fa fa-sign-out mr-1"></i> Logout
+    <!-- Navigation Buttons -->
+    <div class="d-flex justify-content-between align-items-center mt-5">
+        <!-- Main Dashboard Button -->
+        <a class="btn btn-info d-flex align-items-center gap-2 px-3 py-2 rounded-pill shadow-sm"
+           th:href="@{/dashboard}">
+            <i class="fa fa-home"></i>
+            <span>Main Dashboard</span>
+        </a>
+
+        <!-- Logout Button -->
+        <a class="btn btn-outline-danger d-flex align-items-center gap-2 px-3 py-2 rounded-pill shadow-sm"
+           th:href="@{/logout}">
+            <i class="fa fa-sign-out"></i>
+            <span>Logout</span>
         </a>
     </div>
 </div>

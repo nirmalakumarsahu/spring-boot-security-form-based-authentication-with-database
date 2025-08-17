@@ -5,6 +5,8 @@ import com.sahu.springboot.security.model.User;
 
 public interface UserService {
     boolean existsByUsername(String username);
+
     boolean existsByEmail(String email);
+
     User addUser(UserRequestDTO userRequestDTO);
 }

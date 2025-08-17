@@ -22,4 +22,16 @@ public class HomeController {
         return AuthConstants.DASHBOARD_PAGE;
     }
 
+    @GetMapping("/admin-dashboard")
+    public String showAdminDashboard() {
+        log.info("Admin Dashboard page accessed");
+        return AuthConstants.ADMIN_DASHBOARD_PAGE;
+    }
+
+    @GetMapping("/user-dashboard")
+    public String showUserDashboard() {
+        log.info("User Dashboard page accessed");
+        return AuthConstants.USER_DASHBOARD_PAGE;
+    }
+
 }

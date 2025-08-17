@@ -12,5 +12,5 @@ public class SecurityUtil {
                 ? (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
                 : null;
     }
-    
+
 }

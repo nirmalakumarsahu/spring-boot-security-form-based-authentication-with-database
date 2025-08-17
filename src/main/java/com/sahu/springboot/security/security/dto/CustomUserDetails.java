@@ -23,7 +23,8 @@ public class CustomUserDetails extends User {
     private List<String> userRoles;
 
     public CustomUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities,
-                             Long userId, String email, List<String> userRoles) {
+                             Long userId, String email, List<String> userRoles)
+    {
         super(username, password, authorities);
         this.userId = userId;
         this.email = email;

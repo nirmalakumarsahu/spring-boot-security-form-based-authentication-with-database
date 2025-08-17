@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
 import java.util.Objects;
@@ -31,28 +32,28 @@ public class AuthController {
     }
 
     @PostMapping("/registration")
-    public String registrationProcess(@ModelAttribute("user") UserRequestDTO userRequestDTO, Map<String, Object> map) {
+    public String registrationProcess(@ModelAttribute("user") UserRequestDTO userRequestDTO, RedirectAttributes redirectAttributes) {
         log.debug("Registration process started for user: {}", userRequestDTO.username());
 
         //Check if the user already exists
-        if(userService.existsByUsername(userRequestDTO.username())) {
-            map.put(AuthConstants.REGISTRATION_ERROR, "Username already exists. Please choose a different username.");
-            return AuthConstants.REGISTRATION_PAGE;
+        if (userService.existsByUsername(userRequestDTO.username())) {
+            redirectAttributes.addFlashAttribute(AuthConstants.REGISTRATION_ERROR, "Username already exists. Please choose a different username.");
+            return AuthConstants.REDIRECT_REGISTRATION_URL;
         }
 
-        if(userService.existsByEmail(userRequestDTO.email())) {
-            map.put(AuthConstants.REGISTRATION_ERROR, "Email already exists. Please choose a different email.");
-            return "registration";
+        if (userService.existsByEmail(userRequestDTO.email())) {
+            redirectAttributes.addFlashAttribute(AuthConstants.REGISTRATION_ERROR, "Email already exists. Please choose a different email.");
+            return AuthConstants.REDIRECT_REGISTRATION_URL;
         }
 
         //Add the user
-        if(Objects.nonNull(userService.addUser(userRequestDTO))) {
-            map.put(AuthConstants.REGISTRATION_SUCCESS, "Registration successful! You can now log in.");
-            return AuthConstants.LOGIN_PAGE;
+        if (Objects.nonNull(userService.addUser(userRequestDTO))) {
+            redirectAttributes.addFlashAttribute(AuthConstants.REGISTRATION_SUCCESS, "Registration successful! You can now login.");
+            return AuthConstants.REDIRECT_LOGIN_URL;
 
         } else {
-            map.put(AuthConstants.REGISTRATION_ERROR, "Registration failed. Please try again.");
-            return AuthConstants.REGISTRATION_PAGE;
+            redirectAttributes.addFlashAttribute(AuthConstants.REGISTRATION_ERROR, "Registration failed. Please try again.");
+            return AuthConstants.REDIRECT_REGISTRATION_URL;
         }
     }
 

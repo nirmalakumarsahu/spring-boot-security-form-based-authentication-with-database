@@ -10,8 +10,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "roles")
 public class Role {
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Boolean isActive;
