@@ -1,6 +1,6 @@
 package com.sahu.springboot.security.dto;
 
-public record UserRequestDTO(
+public record UserRequest(
         String username,
         String email,
         String password
