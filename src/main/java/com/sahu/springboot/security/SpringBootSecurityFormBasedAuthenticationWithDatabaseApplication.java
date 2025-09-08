@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootSecurityUsingDatabaseFormBasedApplication {
+public class SpringBootSecurityFormBasedAuthenticationWithDatabaseApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootSecurityUsingDatabaseFormBasedApplication.class, args);
+        SpringApplication.run(SpringBootSecurityFormBasedAuthenticationWithDatabaseApplication.class, args);
     }
 
 }

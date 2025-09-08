@@ -9,7 +9,7 @@ services:
       - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: microservices
+      MYSQL_DATABASE: springboot
       MYSQL_USER: nirmala
       MYSQL_PASSWORD: nirmala@123
     volumes:
