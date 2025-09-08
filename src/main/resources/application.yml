@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: spring-boot-security-using-database-form-based
+    name: spring-boot-security-form-based-authentication-with-database
 
   #MySQL Configuration
   datasource:
