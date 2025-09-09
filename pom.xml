@@ -11,10 +11,10 @@
 	</parent>
 
 	<groupId>com.sahu.spring-boot-security</groupId>
-	<artifactId>spring-boot-security-using-database-form-based</artifactId>
+	<artifactId>spring-boot-security-form-based-authentication-with-database</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot-security-using-database-form-based</name>
-	<description>spring-boot-security-using-database-form-based</description>
+	<name>spring-boot-security-form-based-authentication-with-database</name>
+	<description>spring-boot-security-form-based-authentication-with-database</description>
 	<url>http://example.com</url>
 
 	<properties>
